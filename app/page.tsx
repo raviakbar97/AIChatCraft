@@ -1,6 +1,9 @@
+'use client';
+
 import { MessageCircle, Shield, Sparkles, Users, Zap, Award, ArrowRight, Bot } from 'lucide-react'
 import Link from 'next/link'
 import ChatDemo from '@/components/ChatDemo'
+import ScrollToTop from '@/components/ScrollToTop'
 
 export default function Home() {
   return (
@@ -24,9 +27,24 @@ export default function Home() {
             <span className="font-bold text-xl glass-text">AIChatCraft</span>
           </div>
           <div className="hidden md:flex gap-6 text-sm">
-            <Link href="#features" className="hover:text-gray-300 transition">Features</Link>
-            <Link href="#pricing" className="hover:text-gray-300 transition">Pricing</Link>
-            <Link href="#contact" className="hover:text-gray-300 transition">Contact</Link>
+            <button 
+              onClick={() => document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' })}
+              className="hover:text-gray-300 transition cursor-pointer"
+            >
+              Features
+            </button>
+            <button 
+              onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
+              className="hover:text-gray-300 transition cursor-pointer"
+            >
+              Pricing
+            </button>
+            <button 
+              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+              className="hover:text-gray-300 transition cursor-pointer"
+            >
+              Contact
+            </button>
           </div>
           <button className="glass px-4 py-2 rounded-lg hover:bg-white/10 transition text-sm">
             Get Started
@@ -53,7 +71,15 @@ export default function Home() {
               Start Free Consultation
               <ArrowRight className="w-5 h-5" />
             </button>
-            <button className="glass px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white/10 transition flex items-center justify-center gap-2">
+            <button 
+              onClick={() => {
+                const demoSection = document.getElementById('demo-section');
+                if (demoSection) {
+                  demoSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+              }}
+              className="glass px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white/10 transition flex items-center justify-center gap-2 cursor-pointer"
+            >
               <MessageCircle className="w-5 h-5" />
               Chat with AI Demo
             </button>
@@ -84,7 +110,7 @@ export default function Home() {
       </section>
 
       {/* AI Demo Showcase - Main Feature */}
-      <section id="demo" className="py-20 px-6 bg-gradient-to-b from-transparent via-white/5 to-transparent">
+      <section id="demo-section" className="py-20 px-6 bg-gradient-to-b from-transparent via-white/5 to-transparent">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <div className="inline-block px-4 py-2 glass rounded-full text-sm mb-4">
@@ -126,7 +152,15 @@ export default function Home() {
                   No robotic responses, no awkward pauses - just genuine, helpful AI.
                 </p>
               </div>
-              <button className="w-full btn-glass glass-strong px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white/20 transition">
+              <button 
+                onClick={() => {
+                  const contactSection = document.getElementById('contact');
+                  if (contactSection) {
+                    contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  }
+                }}
+                className="w-full btn-glass glass-strong px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white/20 transition cursor-pointer"
+              >
                 Start Your Free Consultation →
               </button>
             </div>
@@ -245,7 +279,15 @@ export default function Home() {
                     <span className="text-green-400">📱</span>
                     Chat on WhatsApp
                   </button>
-                  <button className="w-full glass px-6 py-4 rounded-lg flex items-center justify-center gap-3 hover:bg-white/10 transition">
+                  <button 
+                    onClick={() => {
+                      const demoSection = document.getElementById('demo-section');
+                      if (demoSection) {
+                        demoSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                      }
+                    }}
+                    className="w-full glass px-6 py-4 rounded-lg flex items-center justify-center gap-3 hover:bg-white/10 transition cursor-pointer"
+                  >
                     <MessageCircle className="w-5 h-5 text-blue-400" />
                     Chat with AI Assistant
                   </button>
@@ -286,13 +328,31 @@ export default function Home() {
       <footer className="py-12 px-6 border-t border-white/10">
         <div className="max-w-7xl mx-auto text-center text-gray-500 text-sm">
           <div className="flex justify-center gap-6 mb-4">
-            <Link href="#features" className="hover:text-gray-300 transition">Features</Link>
-            <Link href="#pricing" className="hover:text-gray-300 transition">Pricing</Link>
-            <Link href="#contact" className="hover:text-gray-300 transition">Contact</Link>
+            <button 
+              onClick={() => document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' })}
+              className="hover:text-gray-300 transition cursor-pointer"
+            >
+              Features
+            </button>
+            <button 
+              onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
+              className="hover:text-gray-300 transition cursor-pointer"
+            >
+              Pricing
+            </button>
+            <button 
+              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+              className="hover:text-gray-300 transition cursor-pointer"
+            >
+              Contact
+            </button>
           </div>
           <p>© 2026 AIChatCraft. All rights reserved.</p>
         </div>
       </footer>
+
+      {/* Scroll to Top Button */}
+      <ScrollToTop />
     </main>
   )
 }

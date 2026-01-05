@@ -129,6 +129,14 @@ export default function ChatDemo() {
         <p className="text-xs text-gray-500 mt-2 text-center">
           {isLoading ? 'AI is thinking...' : 'Live AI demo - try asking about pricing, features, or security!'}
         </p>
+        <div className="mt-2 text-center">
+          <button 
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="text-xs text-gray-400 hover:text-white transition underline"
+          >
+            Back to top ↑
+          </button>
+        </div>
       </div>
     </div>
   );
