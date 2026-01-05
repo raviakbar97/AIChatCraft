@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { X, Send } from 'lucide-react';
+import { Send } from 'lucide-react';
 
 export default function ChatDemo() {
   const [messages, setMessages] = React.useState<Array<{role: 'user' | 'ai', content: string}>>([
@@ -87,21 +87,27 @@ export default function ChatDemo() {
     <div className="chat-container glass rounded-2xl overflow-hidden">
       <div className="bg-white/5 p-4 border-b border-white/10 flex justify-between items-center">
         <div className="flex items-center gap-3">
-          <div className={`w-2 h-2 rounded-full ${isLoading ? 'bg-yellow-400 animate-pulse' : 'bg-green-400'}`}></div>
+          <div className={`w-2 h-2 rounded-full ${isLoading ? 'bg-yellow-400 animate-pulse' : 'bg-green-400'} transition-colors duration-300`}></div>
           <span className="font-semibold">AI Assistant Demo</span>
         </div>
-        <X className="w-5 h-5 cursor-pointer hover:text-white transition" />
       </div>
       
       <div className="h-80 overflow-y-auto p-4 space-y-3">
         {messages.map((msg, i) => (
-          <div key={i} className={`chat-bubble-${msg.role} p-3 max-w-[85%] ${msg.role === 'user' ? 'ml-auto' : ''}`}>
+          <div 
+            key={i} 
+            className={`chat-bubble-${msg.role} p-3 max-w-[85%] ${msg.role === 'user' ? 'ml-auto' : ''} message-fade-in`}
+          >
             <p className="text-sm leading-relaxed">{msg.content}</p>
           </div>
         ))}
         {isLoading && (
           <div className="chat-bubble-ai p-3 max-w-[85%]">
-            <p className="text-sm text-gray-400">Typing...</p>
+            <div className="typing-indicator">
+              <div className="typing-dot"></div>
+              <div className="typing-dot"></div>
+              <div className="typing-dot"></div>
+            </div>
           </div>
         )}
         <div ref={messagesEndRef} />
@@ -116,12 +122,12 @@ export default function ChatDemo() {
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
             disabled={isLoading}
-            className="flex-1 bg-white/5 border border-white/10 rounded-lg px-4 py-2 focus:outline-none focus:border-white/30 transition disabled:opacity-50"
+            className="flex-1 bg-white/5 border border-white/10 rounded-lg px-4 py-2 focus:outline-none focus:border-white/30 transition-all duration-300 disabled:opacity-50 hover:bg-white/10 focus:bg-white/10"
           />
           <button 
             type="submit"
             disabled={isLoading || !input.trim()}
-            className="glass px-4 py-2 rounded-lg hover:bg-white/10 transition disabled:opacity-50 disabled:cursor-not-allowed"
+            className="glass px-4 py-2 rounded-lg hover:bg-white/10 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed active:scale-95"
           >
             <Send className="w-5 h-5" />
           </button>
@@ -129,14 +135,6 @@ export default function ChatDemo() {
         <p className="text-xs text-gray-500 mt-2 text-center">
           {isLoading ? 'AI is thinking...' : 'Live AI demo - try asking about pricing, features, or security!'}
         </p>
-        <div className="mt-2 text-center">
-          <button 
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="text-xs text-gray-400 hover:text-white transition underline"
-          >
-            Back to top ↑
-          </button>
-        </div>
       </div>
     </div>
   );
